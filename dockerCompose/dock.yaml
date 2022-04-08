@@ -1,0 +1,64 @@
+version: "2.2"
+services:
+  reverseProxy:
+    image: jwilder/nginx-proxy
+    restart: always
+    ports:
+      - 80:80
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+  yikkachewp:
+    build:
+      context: .
+    image: wordcus
+    restart: always
+    environment:
+      - WORDPRESS_DB_HOST=yikkachedb
+      - WORDPRESS_DB_USER=yikkache
+      - WORDPRESS_DB_PASSWORD=lah2525
+      - WORDPRESS_DB_NAME=yikkachesiraj
+      - VIRTUAL_HOST=yikkache.example1.test
+    volumes:
+      - yikkachewpv:/var/www/html
+    container_name: yikkachewp
+  yikkachedb:
+    image: mysql:5.7
+    restart: always
+    environment:
+      - MYSQL_DATABASE=yikkachesiraj
+      - MYSQL_USER=yikkache
+      - MYSQL_PASSWORD=lah2525
+      - MYSQL_RANDOM_ROOT_PASSWORD=1
+    volumes:
+      - yikkachedbv:/var/lib/mysql
+    container_name: yikkachedb
+  alotfiwp:
+    build:
+      context: .
+    image: wordcus
+    restart: always
+    environment:
+      - WORDPRESS_DB_HOST=alotfidb
+      - WORDPRESS_DB_USER=alotfi
+      - WORDPRESS_DB_PASSWORD=lah2525
+      - WORDPRESS_DB_NAME=alotfisiraj
+      - VIRTUAL_HOST=alotfi.example1.test
+    volumes:
+      - alotfiwpv:/var/www/html
+    container_name: alotfiwp
+  alotfidb:
+    image: mysql:5.7
+    restart: always
+    environment:
+      - MYSQL_DATABASE=alotfisiraj
+      - MYSQL_USER=alotfi
+      - MYSQL_PASSWORD=lah2525
+      - MYSQL_RANDOM_ROOT_PASSWORD=1
+    volumes:
+      - alotfidbv:/var/lib/mysql
+    container_name: alotfidb
+volumes:
+  yikkachewpv: ""
+  yikkachedbv: ""
+  alotfiwpv: ""
+  alotfidbv: ""
