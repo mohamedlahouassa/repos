@@ -64,20 +64,20 @@ const run = () => {
       console.log("docker compose created ");
     });
     if (result.length > 0) {
-      // exec(
-      //   "docker-compose -f ./dockerCompose/dock.yaml up -d",
-      //   (error, stdout, stderr) => {
-      //     if (error) {
-      //       console.log(`error: ${error.message}`);
-      //       return;
-      //     }
-      //     if (stderr) {
-      //       console.log(`stderr: ${stderr}`);
-      //       return;
-      //     }
-      //     console.log(`stdout: ${stdout}`);
-      //   }
-      // );
+       exec(
+        "docker-compose -f ./dockerCompose/dock.yaml up -d",
+        (error, stdout, stderr) => {
+          if (error) {
+            console.log(`error: ${error.message}`);
+            return;
+          }
+          if (stderr) {
+            console.log(`stderr: ${stderr}`);
+            return;
+          }
+          console.log(`stdout: ${stdout}`);
+        }
+      );
     }
   });
 };
